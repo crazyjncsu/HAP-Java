@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import javax.json.JsonNumber;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonValue;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * A characteristic that provides a Float value type.

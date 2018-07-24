@@ -2,7 +2,7 @@ package com.beowulfe.hap.characteristics;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 import javax.json.Json;

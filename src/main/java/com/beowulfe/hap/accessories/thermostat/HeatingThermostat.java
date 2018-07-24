@@ -1,6 +1,6 @@
 package com.beowulfe.hap.accessories.thermostat;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import com.beowulfe.hap.HomekitCharacteristicChangeCallback;
 

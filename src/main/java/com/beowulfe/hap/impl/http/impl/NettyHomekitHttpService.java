@@ -12,7 +12,7 @@ import io.netty.util.concurrent.*;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -4,7 +4,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import org.junit.*;
 

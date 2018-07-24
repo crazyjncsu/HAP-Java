@@ -1,6 +1,6 @@
 package com.beowulfe.hap.impl.http.impl;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import com.beowulfe.hap.impl.HomekitWebHandler;
 import com.beowulfe.hap.impl.http.HomekitClientConnectionFactory;

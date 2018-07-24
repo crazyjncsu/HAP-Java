@@ -7,7 +7,7 @@ import com.beowulfe.hap.impl.services.MotionSensorService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A motion sensor that reports whether motion has been detected.</p>

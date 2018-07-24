@@ -7,7 +7,7 @@ import com.beowulfe.hap.impl.services.LightSensorService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * A light sensor that reports current ambient light level.

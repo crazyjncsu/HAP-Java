@@ -1,6 +1,6 @@
 package com.beowulfe.hap.impl.characteristics.windowcovering;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import com.beowulfe.hap.accessories.WindowCovering;
 import com.beowulfe.hap.characteristics.BooleanCharacteristic;

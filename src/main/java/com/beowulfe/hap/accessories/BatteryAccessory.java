@@ -2,7 +2,7 @@ package com.beowulfe.hap.accessories;
 
 import com.beowulfe.hap.HomekitCharacteristicChangeCallback;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * An accessory that runs on batteries. Accessories that run on batteries are able to report

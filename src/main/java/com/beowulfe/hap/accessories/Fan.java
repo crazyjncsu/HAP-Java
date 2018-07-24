@@ -2,7 +2,7 @@ package com.beowulfe.hap.accessories;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import com.beowulfe.hap.*;
 import com.beowulfe.hap.accessories.properties.RotationDirection;

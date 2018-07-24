@@ -4,7 +4,7 @@ import com.beowulfe.hap.HomekitCharacteristicChangeCallback;
 import com.beowulfe.hap.characteristics.EventableCharacteristic;
 import com.beowulfe.hap.characteristics.IntegerCharacteristic;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 

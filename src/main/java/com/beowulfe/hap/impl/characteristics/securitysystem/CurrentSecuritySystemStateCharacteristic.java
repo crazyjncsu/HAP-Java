@@ -6,7 +6,7 @@ import com.beowulfe.hap.accessories.properties.CurrentSecuritySystemState;
 import com.beowulfe.hap.characteristics.EnumCharacteristic;
 import com.beowulfe.hap.characteristics.EventableCharacteristic;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 public class CurrentSecuritySystemStateCharacteristic extends EnumCharacteristic implements EventableCharacteristic {
 

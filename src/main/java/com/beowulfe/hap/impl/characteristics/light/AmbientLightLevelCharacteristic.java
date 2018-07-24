@@ -5,7 +5,7 @@ import com.beowulfe.hap.accessories.LightSensor;
 import com.beowulfe.hap.characteristics.EventableCharacteristic;
 import com.beowulfe.hap.characteristics.FloatCharacteristic;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 public class AmbientLightLevelCharacteristic extends FloatCharacteristic implements EventableCharacteristic {
 

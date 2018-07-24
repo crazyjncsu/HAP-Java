@@ -5,7 +5,7 @@ import com.beowulfe.hap.accessories.MotionSensor;
 import com.beowulfe.hap.characteristics.BooleanCharacteristic;
 import com.beowulfe.hap.characteristics.EventableCharacteristic;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 public class MotionDetectedStateCharacteristic extends BooleanCharacteristic implements EventableCharacteristic {
 

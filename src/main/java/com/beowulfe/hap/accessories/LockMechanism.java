@@ -8,7 +8,7 @@ import com.beowulfe.hap.impl.services.LockMechanismService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A lock capable of exposing its binary locked state. For a lock that can be locked/unlocked, use

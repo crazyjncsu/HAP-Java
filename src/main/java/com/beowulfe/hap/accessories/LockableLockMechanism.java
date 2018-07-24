@@ -1,6 +1,6 @@
 package com.beowulfe.hap.accessories;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import com.beowulfe.hap.HomekitCharacteristicChangeCallback;
 import com.beowulfe.hap.accessories.properties.LockMechanismState;

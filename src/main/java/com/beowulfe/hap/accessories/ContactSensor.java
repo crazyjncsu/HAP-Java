@@ -8,7 +8,7 @@ import com.beowulfe.hap.impl.services.ContactSensorService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A contact sensor that reports whether contact is detected or not. Typical

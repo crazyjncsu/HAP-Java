@@ -8,7 +8,7 @@ import com.beowulfe.hap.impl.services.SmokeSensorService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A smoke sensor reports whether smoke has been detected or not.</p>

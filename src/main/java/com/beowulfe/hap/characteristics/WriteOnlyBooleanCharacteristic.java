@@ -1,6 +1,6 @@
 package com.beowulfe.hap.characteristics;
 
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 import javax.json.JsonObjectBuilder;
 

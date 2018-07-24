@@ -8,7 +8,7 @@ import com.beowulfe.hap.impl.services.CarbonMonoxideSensorService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A carbon monoxide sensor reports whether carbon monoxide has been detected or not.</p>

@@ -10,7 +10,7 @@ import com.beowulfe.hap.impl.services.SecuritySystemService;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.CompletableFuture;
+import java8.util.concurrent.CompletableFuture;
 
 /**
  * <p>A security system that can be armed so that when a contact sensor is opened or a motion
