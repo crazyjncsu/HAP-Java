@@ -1,8 +1,8 @@
 package com.beowulfe.hap.impl.characteristics.common;
 
 import java8.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java8.util.function.Consumer;
+import java8.util.function.Supplier;
 
 import com.beowulfe.hap.HomekitCharacteristicChangeCallback;
 import com.beowulfe.hap.characteristics.BooleanCharacteristic;

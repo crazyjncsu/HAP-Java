@@ -98,8 +98,14 @@
 
         <dependency>
             <groupId>net.sourceforge.streamsupport</groupId>
+            <artifactId>streamsupport</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sourceforge.streamsupport</groupId>
             <artifactId>streamsupport-cfuture</artifactId>
-            <version>1.6.3</version>
+            <version>1.6.0</version>
         </dependency>
 
         <dependency>

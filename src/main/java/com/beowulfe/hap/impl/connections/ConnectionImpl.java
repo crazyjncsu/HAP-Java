@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Collection;
-import java.util.function.Consumer;
+import java8.util.function.Consumer;
 
 import org.bouncycastle.util.Pack;
 import org.slf4j.Logger;

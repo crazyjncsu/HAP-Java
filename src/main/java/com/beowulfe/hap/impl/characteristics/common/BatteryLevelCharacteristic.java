@@ -5,8 +5,8 @@ import com.beowulfe.hap.characteristics.EventableCharacteristic;
 import com.beowulfe.hap.characteristics.IntegerCharacteristic;
 
 import java8.util.concurrent.CompletableFuture;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java8.util.function.Consumer;
+import java8.util.function.Supplier;
 
 public class BatteryLevelCharacteristic extends IntegerCharacteristic implements EventableCharacteristic {
 

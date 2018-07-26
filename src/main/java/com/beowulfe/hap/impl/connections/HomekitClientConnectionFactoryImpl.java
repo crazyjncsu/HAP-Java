@@ -1,6 +1,6 @@
 package com.beowulfe.hap.impl.connections;
 
-import java.util.function.Consumer;
+import java8.util.function.Consumer;
 
 import com.beowulfe.hap.HomekitAuthInfo;
 import com.beowulfe.hap.impl.HomekitRegistry;
