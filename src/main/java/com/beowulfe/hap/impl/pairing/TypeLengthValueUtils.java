@@ -92,7 +92,7 @@ public class TypeLengthValueUtils {
 		}
 		
 		private void add(short type, byte[] bytes) {
-			result.merge(type, bytes, ByteUtils::joinBytes);
+			result.merge(type, bytes, ByteUtils::joinBytesCompat);
 		}
 		
 	}

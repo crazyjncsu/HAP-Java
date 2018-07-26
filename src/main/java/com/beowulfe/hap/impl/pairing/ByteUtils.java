@@ -21,6 +21,10 @@ class ByteUtils {
 		}
 		return ret;
 	}
+
+	public static byte[] joinBytesCompat(byte[] piece1, byte[] piece2) {
+		return ByteUtils.joinBytes(new byte[][] { piece1, piece2 });
+	}
 	
 	public static byte[] toByteArray(BigInteger i) {
 		byte[] array = i.toByteArray();
