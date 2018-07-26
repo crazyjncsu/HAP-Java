@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java8.util.concurrent.CompletableFuture;
+import java8.util.stream.StreamSupport;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
@@ -76,7 +77,7 @@ public class AccessoryController {
 		return CompletableFuture.allOf(characteristicFutures.toArray(new CompletableFuture<?>[characteristicFutures.size()]))
 			.thenApply(v -> {
 				JsonArrayBuilder jsonCharacteristics = Json.createArrayBuilder();
-				characteristicFutures.stream().map(future -> future.join()).forEach(c -> jsonCharacteristics.add(c));
+				StreamSupport.stream(characteristicFutures).map(future -> future.join()).forEach(c -> jsonCharacteristics.add(c));
 				builder.add("characteristics", jsonCharacteristics);
 				return builder.build();
 			});

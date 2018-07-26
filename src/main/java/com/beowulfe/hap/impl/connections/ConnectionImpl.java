@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Collection;
 import java8.util.function.Consumer;
+import java8.util.stream.StreamSupport;
 
 import org.bouncycastle.util.Pack;
 import org.slf4j.Logger;
@@ -71,7 +72,7 @@ class ConnectionImpl implements HomekitClientConnection {
 			return new byte[0];
 		} else {
 			try(ByteArrayOutputStream decrypted = new ByteArrayOutputStream()) {
-				res.stream().map(msg -> decrypt(msg))
+				StreamSupport.stream(res).map(msg -> decrypt(msg))
 						.forEach(bytes -> {
 							try {
 								decrypted.write(bytes);
