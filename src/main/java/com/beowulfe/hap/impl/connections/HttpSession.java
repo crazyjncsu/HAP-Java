@@ -20,6 +20,7 @@ import com.beowulfe.hap.impl.pairing.PairingManager;
 import com.beowulfe.hap.impl.pairing.PairingUpdateController;
 import com.beowulfe.hap.impl.responses.InternalServerErrorResponse;
 import com.beowulfe.hap.impl.responses.NotFoundResponse;
+import com.beowulfe.hap.impl.pairing.PairingListener;
 
 class HttpSession {
 	
@@ -32,17 +33,17 @@ class HttpSession {
 	private final HomekitRegistry registry;
 	private final SubscriptionManager subscriptions;
 	private final HomekitClientConnection connection;
-	private final JmdnsHomekitAdvertiser advertiser;
+	private final PairingListener pairingListener;
 	
 	private final static Logger logger = LoggerFactory.getLogger(HttpSession.class);
 	
 	public HttpSession(HomekitAuthInfo authInfo, HomekitRegistry registry, SubscriptionManager subscriptions,
-			HomekitClientConnection connection, JmdnsHomekitAdvertiser advertiser) {
+			HomekitClientConnection connection, PairingListener pairingListener) {
 		this.authInfo = authInfo;
 		this.registry = registry;
 		this.subscriptions = subscriptions;
 		this.connection = connection;
-		this.advertiser = advertiser;
+		this.pairingListener = pairingListener;
 	}
 
 	public HttpResponse handleRequest(HttpRequest request) throws IOException {
@@ -80,7 +81,7 @@ class HttpSession {
 				}
 				
 			case "/pairings":
-				return new PairingUpdateController(authInfo, advertiser).handle(request);
+				return new PairingUpdateController(authInfo, pairingListener).handle(request);
 				
 			default:
 				if (request.getUri().startsWith("/characteristics?")) {
@@ -99,7 +100,7 @@ class HttpSession {
 		if (pairingManager == null) {
 			synchronized(HttpSession.class) {
 				if (pairingManager == null) {
-					pairingManager = new PairingManager(authInfo, registry, advertiser);
+					pairingManager = new PairingManager(authInfo, registry, pairingListener);
 				}
 			}
 		}

@@ -8,25 +8,26 @@ import com.beowulfe.hap.impl.http.HomekitClientConnection;
 import com.beowulfe.hap.impl.http.HomekitClientConnectionFactory;
 import com.beowulfe.hap.impl.http.HttpResponse;
 import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
+import com.beowulfe.hap.impl.pairing.PairingListener;
 
 public class HomekitClientConnectionFactoryImpl implements HomekitClientConnectionFactory{
 
 	private final HomekitAuthInfo authInfo;
 	private final HomekitRegistry registry;
 	private final SubscriptionManager subscriptions;
-	private final JmdnsHomekitAdvertiser advertiser;
+	private final PairingListener pairingListener;
 	
 	public HomekitClientConnectionFactoryImpl(HomekitAuthInfo authInfo,
-			HomekitRegistry registry, SubscriptionManager subscriptions, JmdnsHomekitAdvertiser advertiser) {
+			HomekitRegistry registry, SubscriptionManager subscriptions, PairingListener pairingListener) {
 		this.registry = registry;
 		this.authInfo = authInfo;
 		this.subscriptions = subscriptions;
-		this.advertiser = advertiser;
+		this.pairingListener = pairingListener;
 	}
 	
 	@Override
 	public HomekitClientConnection createConnection(Consumer<HttpResponse> outOfBandMessageCallback) {
-		return new ConnectionImpl(authInfo, registry, outOfBandMessageCallback, subscriptions, advertiser);
+		return new ConnectionImpl(authInfo, registry, outOfBandMessageCallback, subscriptions, pairingListener);
 	}
 
 	

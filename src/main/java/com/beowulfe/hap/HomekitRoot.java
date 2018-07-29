@@ -5,6 +5,7 @@ import com.beowulfe.hap.impl.HomekitWebHandler;
 import com.beowulfe.hap.impl.accessories.Bridge;
 import com.beowulfe.hap.impl.connections.HomekitClientConnectionFactoryImpl;
 import com.beowulfe.hap.impl.connections.SubscriptionManager;
+import com.beowulfe.hap.impl.pairing.PairingListener;
 import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,8 +99,12 @@ public class HomekitRoot {
 	public void start() {
 		started = true;
 		registry.reset();
-		webHandler.start(new HomekitClientConnectionFactoryImpl(authInfo,
-				registry, subscriptions, advertiser)).thenAccept(port -> {
+		webHandler.start(new HomekitClientConnectionFactoryImpl(
+				authInfo,
+				registry,
+				subscriptions,
+				new PairingListener() { public void onPairingChanged() throws IOException { HomekitRoot.this.refreshAuthInfo(); } }
+		)).thenAccept(port -> {
 					try {
 						refreshAuthInfo();
 						advertiser.advertise(label, authInfo.getMac(), port, configurationIndex);

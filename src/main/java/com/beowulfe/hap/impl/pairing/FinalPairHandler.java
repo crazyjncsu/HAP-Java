@@ -13,19 +13,20 @@ import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import com.beowulfe.hap.impl.pairing.PairSetupRequest.Stage3Request;
 import com.beowulfe.hap.impl.pairing.TypeLengthValueUtils.DecodeResult;
 import com.beowulfe.hap.impl.pairing.TypeLengthValueUtils.Encoder;
+import com.beowulfe.hap.impl.pairing.PairingListener;
 
 class FinalPairHandler {
 	
 	private final byte[] k;
 	private final HomekitAuthInfo authInfo;
-	private final JmdnsHomekitAdvertiser advertiser;
+	private final PairingListener pairingListener;
 	
 	private byte[] hkdf_enc_key;
 	
-	public FinalPairHandler(byte[] k, HomekitAuthInfo authInfo, JmdnsHomekitAdvertiser advertiser) {
+	public FinalPairHandler(byte[] k, HomekitAuthInfo authInfo, PairingListener pairingListener) {
 		this.k = k;
 		this.authInfo = authInfo;
-		this.advertiser = advertiser;
+		this.pairingListener = pairingListener;
 	}
 
 	public HttpResponse handle(PairSetupRequest req) throws Exception {
@@ -62,7 +63,7 @@ class FinalPairHandler {
 			throw new Exception("Invalid signature");
 		}
 		authInfo.createUser(authInfo.getMac()+new String(username, StandardCharsets.UTF_8), ltpk);
-		advertiser.setDiscoverable(false);
+		pairingListener.onPairingChanged();
 		return createResponse();
 	}
 	
