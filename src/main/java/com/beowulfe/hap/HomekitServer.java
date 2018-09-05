@@ -39,12 +39,12 @@ public class HomekitServer {
 	 * @param nThreads number of threads to use in the http server
 	 * @throws IOException when the server cannot bind to the supplied port
 	 */
-	public HomekitServer(InetAddress localAddress, int port, int nThreads) throws IOException {
+	public HomekitServer(InetAddress localAddress, int port) throws IOException {
 		this.mdnsRegistry = new HomekitAdvertiser.JmdnsRegistry(localAddress);
 		http = new HomekitHttpServer(port, Runtime.getRuntime().availableProcessors());
 	}
 
-	public HomekitServer(HomekitAdvertiser.MdnsRegistry mdnsRegistry, int port, int nThreads) throws IOException {
+	public HomekitServer(HomekitAdvertiser.MdnsRegistry mdnsRegistry, int port) throws IOException {
 		this.mdnsRegistry = mdnsRegistry;
 		http = new HomekitHttpServer(port, Runtime.getRuntime().availableProcessors());
 	}
