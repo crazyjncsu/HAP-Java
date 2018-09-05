@@ -6,7 +6,6 @@ import java.nio.charset.StandardCharsets;
 import com.beowulfe.hap.HomekitAuthInfo;
 import com.beowulfe.hap.impl.http.HttpRequest;
 import com.beowulfe.hap.impl.http.HttpResponse;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import com.beowulfe.hap.impl.pairing.TypeLengthValueUtils.DecodeResult;
 import com.beowulfe.hap.impl.pairing.PairingListener;
 

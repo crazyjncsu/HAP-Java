@@ -12,7 +12,6 @@ import com.beowulfe.hap.impl.HomekitRegistry;
 import com.beowulfe.hap.impl.http.HomekitClientConnection;
 import com.beowulfe.hap.impl.http.HttpRequest;
 import com.beowulfe.hap.impl.http.HttpResponse;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import com.beowulfe.hap.impl.json.AccessoryController;
 import com.beowulfe.hap.impl.json.CharacteristicsController;
 import com.beowulfe.hap.impl.pairing.PairVerificationManager;

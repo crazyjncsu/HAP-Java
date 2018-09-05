@@ -7,7 +7,6 @@ import com.beowulfe.hap.impl.HomekitRegistry;
 import com.beowulfe.hap.impl.http.HomekitClientConnection;
 import com.beowulfe.hap.impl.http.HomekitClientConnectionFactory;
 import com.beowulfe.hap.impl.http.HttpResponse;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import com.beowulfe.hap.impl.pairing.PairingListener;
 
 public class HomekitClientConnectionFactoryImpl implements HomekitClientConnectionFactory{

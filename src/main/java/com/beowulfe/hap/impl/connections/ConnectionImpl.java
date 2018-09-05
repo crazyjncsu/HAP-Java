@@ -17,7 +17,6 @@ import com.beowulfe.hap.impl.HomekitRegistry;
 import com.beowulfe.hap.impl.crypto.ChachaDecoder;
 import com.beowulfe.hap.impl.crypto.ChachaEncoder;
 import com.beowulfe.hap.impl.http.*;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
 import com.beowulfe.hap.impl.pairing.UpgradeResponse;
 import com.beowulfe.hap.impl.pairing.PairingListener;
 
