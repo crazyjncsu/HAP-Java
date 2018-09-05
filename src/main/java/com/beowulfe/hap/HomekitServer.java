@@ -7,6 +7,7 @@ import java.security.InvalidAlgorithmParameterException;
 
 import com.beowulfe.hap.impl.HomekitBridge;
 import com.beowulfe.hap.impl.HomekitUtils;
+import com.beowulfe.hap.impl.HomekitAdvertiser;
 import com.beowulfe.hap.impl.http.impl.HomekitHttpServer;
 
 /**
@@ -26,7 +27,7 @@ import com.beowulfe.hap.impl.http.impl.HomekitHttpServer;
 public class HomekitServer {
 
 	private final HomekitHttpServer http;
-	private final InetAddress localAddress;
+	private final HomekitAdvertiser.MdnsRegistry mdnsRegistry;
 	
 	/**
 	 * Constructor. Contains an argument indicating the number of threads to use in the http server. The other constructors 
@@ -39,31 +40,15 @@ public class HomekitServer {
 	 * @throws IOException when the server cannot bind to the supplied port
 	 */
 	public HomekitServer(InetAddress localAddress, int port, int nThreads) throws IOException {
-		this.localAddress = localAddress;
-		http = new HomekitHttpServer(port, nThreads);
+		this.mdnsRegistry = new HomekitAdvertiser.JmdnsRegistry(localAddress);
+		http = new HomekitHttpServer(port, Runtime.getRuntime().availableProcessors());
 	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param localAddress local address to bind to
-	 * @param port local port to bind to
-	 * @throws IOException when the server cannot bind to the supplied port
-	 */
-	public HomekitServer(InetAddress localAddress, int port) throws IOException {
-		this(localAddress, port, Runtime.getRuntime().availableProcessors());
+
+	public HomekitServer(HomekitAdvertiser.MdnsRegistry mdnsRegistry, int port, int nThreads) throws IOException {
+		this.mdnsRegistry = mdnsRegistry;
+		http = new HomekitHttpServer(port, Runtime.getRuntime().availableProcessors());
 	}
-	
-	/**
-	 * Constructor
-	 * 
-	 * @param port local port to bind to.
-	 * @throws IOException when the server cannot bind to the supplied port
-	 */
-	public HomekitServer(int port) throws IOException {
-		this(InetAddress.getLocalHost(), port);
-	}
-	
+
 	/**
 	 * Stops the service, closing down existing connections and preventing new ones.
 	 */
@@ -83,8 +68,7 @@ public class HomekitServer {
 	 */
 	public HomekitStandaloneAccessoryServer createStandaloneAccessory(HomekitAuthInfo authInfo, 
 			HomekitAccessory accessory) throws IOException {
-		return new HomekitStandaloneAccessoryServer(accessory, http,
-				localAddress, authInfo);
+		return new HomekitStandaloneAccessoryServer(accessory, http, this.mdnsRegistry, authInfo);
 	}
 	
 	/**
@@ -102,7 +86,7 @@ public class HomekitServer {
 	 */
 	public HomekitRoot createBridge(HomekitAuthInfo authInfo, String label, String manufacturer,
 			String model, String serialNumber) throws IOException {
-		HomekitRoot root = new HomekitRoot(label, http, localAddress, authInfo);
+		HomekitRoot root = new HomekitRoot(label, http, authInfo, this.mdnsRegistry);
 		root.addAccessory(new HomekitBridge(label, serialNumber, model, manufacturer));
 		return root;
 	}

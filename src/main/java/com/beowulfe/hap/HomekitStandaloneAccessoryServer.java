@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import com.beowulfe.hap.impl.HomekitAdvertiser;
 import com.beowulfe.hap.impl.HomekitWebHandler;
 
 /**
@@ -18,9 +19,9 @@ public class HomekitStandaloneAccessoryServer {
 	private final HomekitRoot root;
 
 	HomekitStandaloneAccessoryServer(HomekitAccessory accessory,
-			HomekitWebHandler webHandler, InetAddress localhost,
+			HomekitWebHandler webHandler, HomekitAdvertiser.MdnsRegistry mdnsRegistry,
 			HomekitAuthInfo authInfo) throws UnknownHostException, IOException {
-		root = new HomekitRoot(accessory.getLabel(), webHandler, localhost, authInfo);
+		root = new HomekitRoot(accessory.getLabel(), webHandler, authInfo, mdnsRegistry);
 		root.addAccessory(accessory);
 	}
 	

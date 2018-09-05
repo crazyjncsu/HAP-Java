@@ -1,4 +1,4 @@
-package com.beowulfe.hap.impl.jmdns;
+package com.beowulfe.hap.impl;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -12,22 +12,43 @@ import javax.jmdns.ServiceInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JmdnsHomekitAdvertiser {
+public class HomekitAdvertiser {
 	
 	private static final String SERVICE_TYPE = "_hap._tcp.local.";
 	
-	private final JmDNS jmdns;
+	private final MdnsRegistry mdnsRegistry;
 	private boolean discoverable = true;
-	private final static Logger logger = LoggerFactory.getLogger(JmdnsHomekitAdvertiser.class);
+	private final static Logger logger = LoggerFactory.getLogger(HomekitAdvertiser.class);
 	private boolean isAdvertising = false;
 	
 	private String label;
 	private String mac;
 	private int port;
 	private int configurationIndex;
+
+	public static interface MdnsRegistry {
+		public void registerService(String serviceType, String label, int port, Map<String, String> properties) throws IOException;
+		public void unregisterAllServices();
+	}
+
+	public static class JmdnsRegistry implements MdnsRegistry {
+		private final JmDNS jmdns;
+
+		public JmdnsRegistry(InetAddress localAddress) throws IOException {
+            this.jmdns = JmDNS.create(localAddress);
+        }
+
+		public void registerService(String serviceType, String label, int port, Map<String, String> properties) throws IOException {
+			this.jmdns.registerService(ServiceInfo.create(serviceType, label, port, 1, 1, properties));
+		}
+
+		public void unregisterAllServices() {
+			this.jmdns.unregisterAllServices();
+		}
+	}
 	
-	public JmdnsHomekitAdvertiser(InetAddress localAddress) throws UnknownHostException, IOException {
-		jmdns = JmDNS.create(localAddress);
+	public HomekitAdvertiser(MdnsRegistry mdnsRegistry) {
+		this.mdnsRegistry = mdnsRegistry;
 	}
 
 	public synchronized void advertise(String label, String mac, int port, int configurationIndex) throws Exception {
@@ -42,16 +63,12 @@ public class JmdnsHomekitAdvertiser {
 		logger.info("Advertising accessory "+label);
 	
 		registerService();
-		
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-    		logger.info("Stopping advertising in response to shutdown.");
-    		jmdns.unregisterAllServices();
-    	}));
+
 		isAdvertising = true;
 	}
 	
 	public synchronized void stop() {
-		jmdns.unregisterAllServices();
+		mdnsRegistry.unregisterAllServices();
 	}
 	
 	public synchronized void setDiscoverable(boolean discoverable) throws IOException {
@@ -59,7 +76,7 @@ public class JmdnsHomekitAdvertiser {
 			this.discoverable = discoverable;
 			if (isAdvertising) {
 				logger.info("Re-creating service due to change in discoverability to "+discoverable);
-				jmdns.unregisterAllServices();
+				mdnsRegistry.unregisterAllServices();
 				registerService();
 			}
 		}
@@ -70,7 +87,7 @@ public class JmdnsHomekitAdvertiser {
 			this.configurationIndex = revision;
 			if (isAdvertising) {
 				logger.info("Re-creating service due to change in configuration index to "+revision);
-				jmdns.unregisterAllServices();
+				mdnsRegistry.unregisterAllServices();
 				registerService();
 			}
 		}
@@ -86,7 +103,6 @@ public class JmdnsHomekitAdvertiser {
 		props.put("s#", "1");
 		props.put("ff", "0");
 		props.put("ci", "1");
-		jmdns.registerService(ServiceInfo.create(SERVICE_TYPE, label, port, 1, 1, props));
+		mdnsRegistry.registerService(SERVICE_TYPE, label, port, props);
 	}
-	
 }

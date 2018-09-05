@@ -6,7 +6,7 @@ import com.beowulfe.hap.impl.accessories.Bridge;
 import com.beowulfe.hap.impl.connections.HomekitClientConnectionFactoryImpl;
 import com.beowulfe.hap.impl.connections.SubscriptionManager;
 import com.beowulfe.hap.impl.pairing.PairingListener;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
+import com.beowulfe.hap.impl.HomekitAdvertiser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class HomekitRoot {
 	
 	private final static Logger logger = LoggerFactory.getLogger(HomekitRoot.class);
 	
-	private final JmdnsHomekitAdvertiser advertiser;
+	private final HomekitAdvertiser advertiser;
 	private final HomekitWebHandler webHandler;
 	private final HomekitAuthInfo authInfo;
 	private final String label;
@@ -34,14 +34,8 @@ public class HomekitRoot {
 	private boolean started = false;
 	private int configurationIndex = 1;
 
-	HomekitRoot(String label, HomekitWebHandler webHandler, InetAddress localhost, 
-			HomekitAuthInfo authInfo) throws IOException {
-		this(label, webHandler, authInfo, new JmdnsHomekitAdvertiser(localhost));
-	}
-	
-	HomekitRoot(String label, HomekitWebHandler webHandler, HomekitAuthInfo authInfo, 
-			JmdnsHomekitAdvertiser advertiser) throws IOException {
-		this.advertiser = advertiser;
+	HomekitRoot(String label, HomekitWebHandler webHandler, HomekitAuthInfo authInfo, HomekitAdvertiser.MdnsRegistry mdnsRegistry) throws IOException {
+		this.advertiser = new HomekitAdvertiser(mdnsRegistry);
 		this.webHandler = webHandler;
 		this.authInfo = authInfo;
 		this.label = label;

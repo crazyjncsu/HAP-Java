@@ -10,14 +10,14 @@ import org.junit.*;
 
 import com.beowulfe.hap.impl.HomekitWebHandler;
 import com.beowulfe.hap.impl.http.HomekitClientConnectionFactory;
-import com.beowulfe.hap.impl.jmdns.JmdnsHomekitAdvertiser;
+import com.beowulfe.hap.impl.HomekitAdvertiser;
 
 public class HomekitRootTest {
 	
 	private HomekitAccessory accessory;
 	private HomekitRoot root;
 	private HomekitWebHandler webHandler;
-	private JmdnsHomekitAdvertiser advertiser;
+	private HomekitAdvertiser.MdnsRegistry mdnsRegistry;
 	private HomekitAuthInfo authInfo;
 	
 	private final static int PORT = 12345;
@@ -29,9 +29,9 @@ public class HomekitRootTest {
 		when(accessory.getId()).thenReturn(2);
 		webHandler = mock(HomekitWebHandler.class);
 		when(webHandler.start(any())).thenReturn(CompletableFuture.completedFuture(PORT));
-		advertiser = mock(JmdnsHomekitAdvertiser.class);
+		mdnsRegistry = mock(HomekitAdvertiser.MdnsRegistry.class);
 		authInfo = mock(HomekitAuthInfo.class);
-		root = new HomekitRoot(LABEL, webHandler, authInfo, advertiser);
+		root = new HomekitRoot(LABEL, webHandler, authInfo, mdnsRegistry);
 	}
 	
 	@Test
@@ -59,22 +59,7 @@ public class HomekitRootTest {
 		root.stop();
 		verify(webHandler).stop();
 	}
-	
-	@Test
-	public void testAdvertiserStarts() throws Exception {
-		String mac = "00:00:00:00:00:00";
-		when(authInfo.getMac()).thenReturn(mac);
-		root.start();
-		verify(advertiser).advertise(eq(LABEL), eq(mac), eq(PORT), eq(1));
-	}
-	
-	@Test
-	public void testAdvertiserStops() throws Exception {
-		root.start();
-		root.stop();
-		verify(advertiser).stop();
-	}
-	
+
 	@Test
 	public void testAddAccessoryResetsWeb() {
 		root.start();
